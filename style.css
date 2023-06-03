@@ -199,10 +199,15 @@
   margin-bottom: 40px;
 }
 
+.category h1 {
+  text-align: center;
+}
+
 .category .row {
   display: flex;
   gap: 20px;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .category .column {
@@ -212,7 +217,7 @@
   border: 1px solid #000;
 }
 
-.category .fashion-shoes {
+/* .category .fashion-shoes {
   background: rgb(255,255,255);
   background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(203,133,217,1) 49%, rgba(203,110,228,1) 100%);
 }
@@ -225,7 +230,7 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,231,157,1) 5
 .category .women-shoes {
   background: rgb(255,255,255);
   background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,157,233,1) 50%, rgba(233,123,220,1) 100%);
-}
+} */
 
 .category p {
   position: absolute;
@@ -378,4 +383,22 @@ footer .logo-contact ul {
 }
 
 #radio-btn ~ .first {
+}
+
+
+/* Animation */
+
+@keyframes headerInTop {
+  from {
+    transform:  translateY(0px);
+  }
+
+  /* to {
+    transform: translateY(0);
+  } */
+}
+
+header {
+  animation: name duration timing-function delay iteration-count direction fill-mode;
+  animation: headerInTop 1s ease-in 1s 1 normal both;
 }

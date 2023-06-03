@@ -86,7 +86,16 @@ const product_list = [
 ];
 
 let shop = document.getElementById("shop");
+const header = document.getElementById("header");
+console.log(header);
 console.log(shop);
+
+const goNext = () => {
+  window.scrollTo({
+    top: 500,
+    behavior: "smooth",
+  });
+};
 
 shop.innerHTML = product_list
   .map((element) => {
