@@ -20,30 +20,15 @@
 }
 
 .top-nav {
-  padding: 30px 0;
+  padding-top: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.top-logo {
-  margin-right: 90px;
-}
 
-.top-logo h2 {
-  position: relative;
-  color: #88e2f8;
-}
-
-.top-logo::before {
-  content: " ";
-  padding: 40px;
-  border-radius: 50%;
-  background-color: black;
-  position: absolute;
-  z-index: -1;
-  left: 120px;
-  top: 10px;
+.top-logo img {
+  width: 130px;
 }
 
 
@@ -59,11 +44,9 @@
   cursor: pointer;
 }
 
-.menu li:hover {
-  color: #88e2f8;
-}
 
-.menu li::before {
+
+.menu a::before {
   content: "";
   width: 0;
   height: 3px;
@@ -73,15 +56,25 @@
   transition: width 0.5s ease-in-out;
 }
 
-.menu li:hover::before {
+.menu a:hover::before {
   width: 100%;
   background-color: #88e2f8;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #000;
+}
+
+.menu a:hover {
+  color: #88e2f8;
 }
 
 .top-nav .column-3 {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
 .top-search {
@@ -245,6 +238,7 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,231,157,1) 5
   bottom: 0;
   width: 100%;
   text-align: center;
+  padding: 10px;
 }
 
 .category img {
@@ -297,6 +291,7 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,231,157,1) 5
 
 #product img {
   width: 100%;
+  cursor: pointer;
 }
 
 #product img:hover {
@@ -306,6 +301,39 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,231,157,1) 5
 
 #product p {
   height: 70px;
+}
+
+
+/* Pagination */
+.page-numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.page-numbers button {
+  background-color: #88e2f8;
+  color: #fff;
+  border: none;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  transition: 0.4s;
+}
+
+.page-numbers button:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.page-numbers button.active {
+  background-color: #fff;
+  color: #000;
 }
 
 .my-brand {
@@ -420,4 +448,37 @@ footer .logo-contact ul {
 header {
   animation: name duration timing-function delay iteration-count direction fill-mode;
   animation: headerInTop 1s ease-in 1s 1 normal both;
+}
+
+/* Product Detail */
+
+#product-detail {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 10px;
+}
+
+.img-product {
+  grid-column:  span 5;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-product img {
+  width: 70%;
+}
+
+.infor-product {
+  grid-column:  span 7;
+  background-color: rgb(207, 207, 207);
+}
+
+.infor-product .quantity {
+  width: 40px;
+  height: 20px;
+  text-align: center;
+  border: 1px solid #000;
+  
 }

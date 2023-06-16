@@ -5,6 +5,7 @@ const product_list = [
     image:
       "https://i.pinimg.com/564x/e6/80/5f/e6805fddb7c95974008907cdb0d1cdbf.jpg",
     price: "2.000.000đ",
+    category: "Men_Shoes",
   },
   {
     id: 2,
@@ -19,6 +20,7 @@ const product_list = [
     image:
       "https://i.pinimg.com/564x/ba/87/cf/ba87cfe55f98d471b4205b0a81add6f4.jpg",
     price: "2.000.000đ",
+    category: "Men_Shoes",
   },
   {
     id: 4,
@@ -33,6 +35,7 @@ const product_list = [
     image:
       "https://i.pinimg.com/564x/cb/dd/e9/cbdde999b9cc6a5ca3199b948c7f05f5.jpg",
     price: "2.000.000đ",
+    category: "Men_Shoes",
   },
   {
     id: 6,
@@ -40,6 +43,7 @@ const product_list = [
     image:
       "https://i.pinimg.com/564x/36/d2/af/36d2af578c80739feeb3a44c26cf9022.jpg",
     price: "2.000.000đ",
+    category: "Men_Shoes",
   },
   {
     id: 7,
@@ -47,6 +51,7 @@ const product_list = [
     image:
       "https://i.pinimg.com/564x/77/32/3f/77323f3b5f36ccd4ca46f9c6ecbb587a.jpg",
     price: "2.000.000đ",
+    category: "Men_Shoes",
   },
   {
     id: 8,
@@ -61,6 +66,7 @@ const product_list = [
     image:
       "https://i.pinimg.com/564x/14/04/ff/1404ff1fc0f235b4f645f91d8a7f5ec0.jpg",
     price: "2.000.000đ",
+    category: "Women_Shoes",
   },
   {
     id: 10,
@@ -82,30 +88,147 @@ const product_list = [
     image:
       "https://i.pinimg.com/564x/09/cb/b2/09cbb213206a873d6dc9b3731544661e.jpg",
     price: "2.000.000đ",
+    category: "Women_Shoes",
   },
 ];
 
-let shop = document.getElementById("shop");
 const header = document.getElementById("header");
-console.log(header);
-console.log(shop);
+const shop = document.getElementById("shop");
+const pagination = document.getElementById("pagination");
+
+let current_page = 1;
+let row = 5;
+
+// Display Shop
+
+const DisplayShop = (products, wrapper, rows_per_page, page) => {
+  wrapper.innerHTML = "";
+  page--;
+
+  let start = rows_per_page * page;
+  let end = start + rows_per_page;
+  let paginatedItems = products.slice(start, end);
+  console.log(paginatedItems);
+
+  for (let i = 0; i < paginatedItems.length; i++) {
+    let product = paginatedItems[i];
+    let product_element = document.createElement("div");
+    product_element.setAttribute("id", "product");
+    product_element.setAttribute("data-id", product.id);
+
+    // let link = document.createElement("a");
+    // link.href = "productDetails.html?id=" + product.id;
+    // link.append(img_element);
+    // product_element.appendChild(link);
+
+    let img_element = document.createElement("img");
+    img_element.src = product.image;
+    product_element.appendChild(img_element);
+
+    let name_element = document.createElement("p");
+    name_element.innerText = product.name;
+    product_element.appendChild(name_element);
+
+    let price_element = document.createElement("h4");
+    price_element.innerText = product.price;
+    product_element.appendChild(price_element);
+
+    wrapper.appendChild(product_element);
+
+    product_element.addEventListener("click", function () {
+      const productId = product_element.getAttribute("data-id");
+
+      const productURL = "./productDetails.html?id=" + productId;
+      window.location.href = productURL;
+    });
+  }
+};
+
+// Pagination
+
+const SetupPagination = (products, wrapper, rows_per_page) => {
+  wrapper.innerHTML = "";
+
+  let page_count = Math.ceil(products.length / rows_per_page);
+  for (let i = 1; i < page_count + 1; i++) {
+    let btn = PaginationButton(i, products);
+    wrapper.appendChild(btn);
+  }
+};
+
+// Pagination Button
+
+const PaginationButton = (page, products) => {
+  let button = document.createElement("button");
+  button.innerText = page;
+
+  if (current_page == page) button.classList.add("active");
+
+  button.addEventListener("click", function () {
+    current_page = page;
+    DisplayShop(products, shop, row, current_page);
+
+    let current_btn = document.querySelector(".page-numbers button.active");
+    current_btn.classList.remove("active");
+
+    button.classList.add("active");
+  });
+
+  return button;
+};
+
+DisplayShop(product_list, shop, row, current_page);
+SetupPagination(product_list, pagination, row);
 
 const goNext = () => {
   window.scrollTo({
-    top: 500,
+    top: 600,
     behavior: "smooth",
   });
 };
 
-shop.innerHTML = product_list
-  .map((element) => {
-    return `<div id="product" ${element.id}>
-  <img
-    src=${element.image}
-    alt=""
-  />
-  <p>${element.name}</p>
-  <h4>${element.price}</h4>
-</div>`;
-  })
-  .join("");
+// shop.innerHTML = product_list
+//   .map((element) => {
+//     return `<div id="product" ${element.id}>
+//   <img
+//     src=${element.image}
+//     alt=""
+//   />
+//   <p>${element.name}</p>
+//   <h4>${element.price}</h4>
+// </div>`;
+//   })
+//   .join("");
+
+// Display Product Detail Page
+
+const men_shoes = document.getElementById("men-shoes");
+console.log(men_shoes);
+const women_shoes = document.getElementById("women-shoes");
+console.log(women_shoes);
+
+const DisplayProductByCategory = () => {
+  var men_category = product_list.find((item) => {
+    return item.category === "Men_Shoes";
+  });
+  var women_category = product_list.find((item) => {
+    return item.category === "Women_Shoes";
+  });
+
+  if (men_category.category) {
+    men_shoes.addEventListener("click", function () {
+      const categoryURL = "./category.html?category=" + men_category.category;
+      window.location.href = categoryURL;
+      console.log("Thanh Cong");
+    });
+  }
+  if (women_category.category) {
+    women_shoes.addEventListener("click", function () {
+      const URL = "./category.html?category=" + women_category.category;
+      window.location.href = URL;
+      console.log("Thanh Cong");
+    });
+  }
+};
+
+DisplayProductByCategory();
